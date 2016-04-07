@@ -1,0 +1,40 @@
+doctype html
+html(lang="en")
+head
+    meta(charset="utf-8")
+    title
+        | Diff to HTML by rtfpessoa
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/github.min.css")
+
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")
+
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/languages/scala.min.js")
+
+    link(rel="stylesheet", type="text/css", href="../dist/diff2html.css")
+    script(type="text/javascript", src="../dist/diff2html-templates.js")
+    script(type="text/javascript", src="../dist/diff2html.js")
+    script(type="text/javascript", src="../dist/diff2html-ui.js")
+
+    script.
+        var lineDiffExample = !{diffCode};
+        lineDiffExample = lineDiffExample.join('\n');
+        console.log(lineDiffExample);
+        $(document).ready(function() {
+            var diff2htmlUi = new Diff2HtmlUI({diff: lineDiffExample});
+            diff2htmlUi.draw('#line-by-line', {inputFormat: 'json', showFiles: true, matching: 'lines'});
+            diff2htmlUi.fileListCloseable('#line-by-line', false);
+            diff2htmlUi.highlightCode('#line-by-line');
+            diff2htmlUi.draw('#side-by-side', {
+                inputFormat: 'json',
+                showFiles: true,
+                matching: 'lines',
+                outputFormat: 'side-by-side'
+            });
+            diff2htmlUi.fileListCloseable('#side-by-side', false);
+            diff2htmlUi.highlightCode('#side-by-side');
+        });
+    body(style={"text-align": "center", "font-family": "'Source Sans Pro',sans-serif"})
+        h2
+            Side by Side
+        div#side-by-side
