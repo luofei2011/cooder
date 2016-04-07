@@ -13,7 +13,7 @@
 #### 安装 
 
 ```bash
-git clone https://github.com/luofei2011/cooder
+git clone https://github.com/luofei2011/cooder.git
 cd cooder
 npm install
 
